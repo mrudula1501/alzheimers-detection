@@ -1,209 +1,110 @@
-# 🧠 Alzheimer's Disease Detection using Deep Learning
+# 🧠 Alzheimer's Disease Detection via Deep Learning
 
-[![Python](https://img.shields.io/badge/Python-3.9-blue)](https://www.python.org/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10-orange)](https://tensorflow.org/)
-[![Keras](https://img.shields.io/badge/Keras-2.10-red)](https://keras.io/)
-[![Docker](https://img.shields.io/badge/Docker-Enabled-blue)](https://docker.com/)
-[![GCP](https://img.shields.io/badge/GCP-Deployed-blue)](https://cloud.google.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.9-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10-FF6F00?style=flat&logo=tensorflow&logoColor=white)](https://tensorflow.org)
+[![Keras](https://img.shields.io/badge/Keras-2.10-D00000?style=flat&logo=keras&logoColor=white)](https://keras.io)
+[![Flask](https://img.shields.io/badge/Flask-2.0-000000?style=flat&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
+[![License](https://img.shields.io/badge/License-MIT-10B981?style=flat)](LICENSE)
 
-> Production-ready deep learning system for early Alzheimer's detection from brain MRI scans.  
-> Achieved **92% classification accuracy** with **14% improvement in diagnostic recall** using a **CNN + SVM hybrid architecture**.
-
-[Live Demo](https://your-demo-link.com) · [API Documentation](https://your-api-docs.com) · [Case Study](https://mrudula1501.github.io/blog/alzheimers-case-study)
+Production-focused machine learning project for early Alzheimer's disease detection from MRI images using a hybrid **CNN + SVM** workflow.
 
 ---
 
-# 📋 Table of Contents
+## 📋 Overview
 
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Tech Stack](#tech-stack)
-- [Dataset](#dataset)
-- [Model Performance](#model-performance)
-- [Installation](#installation)
-- [Requirements](#requirements)
-- [Usage](#usage)
-- [Deployment](#deployment)
-- [Results & Visualizations](#results--visualizations)
-- [Future Work](#future-work)
-- [References](#references)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+This repository provides an automated pipeline for classifying MRI scans into:
+
+| Label | Description |
+|-------|-------------|
+| **AD** | Alzheimer's Disease |
+| **MCI** | Mild Cognitive Impairment |
+| **CN** | Cognitively Normal |
+
+The project combines deep learning feature extraction with traditional machine learning classification, structured as a lightweight inference-ready application.
 
 ---
 
-# 🎯 Overview
-
-Alzheimer's disease affects **55 million people worldwide**, and early diagnosis plays a crucial role in improving patient outcomes. Traditional diagnosis relies heavily on expert neurologists and radiologists analyzing MRI scans, which is time-consuming and expensive.
-
-This project introduces an **automated deep learning system that detects Alzheimer's disease from brain MRI images**, helping clinicians with early-stage diagnosis.
-
-### Key Features
-
-- ✅ **Hybrid CNN + SVM Architecture**  
-  Combines deep feature extraction with robust classification.
-
-- ✅ **Explainable AI**  
-  Integrated **SHAP and LIME** explanations to help clinicians understand model predictions.
-
-- ✅ **Production Deployment**  
-  Dockerized API deployed on **Google Cloud Platform**.
-
-- ✅ **Real-time Inference**  
-  Inference time **under 100ms**.
-
-- ✅ **Secure Pipeline**  
-  Designed with secure data handling practices suitable for healthcare environments.
-
----
-
-# 💼 Business Impact
-
-| Metric | Value |
-|------|------|
-| **Accuracy** | 92% |
-| **Recall Improvement** | +14% |
-| **Inference Time** | <100ms |
-| **Potential Cost Reduction** | $2M+ annually at scale |
-
----
-
-# 🏗️ Architecture
+## 📁 Project Structure
 
 ```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   Brain MRI     │────▶│  Preprocessing   │────▶│   CNN Feature   │
-│   Input Image   │     │  (Resize, Norm)  │     │   Extraction    │
-└─────────────────┘     └──────────────────┘     └────────┬────────┘
-                                                          │
-                                               ┌──────────▼─────────┐
-                                               │        SVM         │
-                                               │     Classifier     │
-                                               └──────────┬─────────┘
-                                                          │
-                                                ┌─────────▼─────────┐
-                                                │   Prediction      │
-                                                │   AD / MCI / CN   │
-                                                └─────────┬─────────┘
-                                                          │
-                                         ┌────────────────▼────────────┐
-                                         │  Explainability Module      │
-                                         │      SHAP / LIME            │
-                                         └─────────────────────────────┘
+alzheimers-detection/
+├── app.py                      # Flask application entrypoint
+├── README.md
+├── requirements.txt
+├── .gitignore
+│
+├── assets/                     # Training artifacts & visualizations
+│   ├── confusion_matrix.png
+│   ├── training_accuracy.png
+│   └── training_loss.png
+│
+├── legacy/                     # Older experimental code (archived)
+│
+├── models/
+│   └── Alzhimer_model.h5       # Trained model weights
+│
+├── notebooks/                  # Jupyter notebooks
+│
+├── samples/                    # Sample MRI images for testing
+│   ├── test1.jpg
+│   └── test2.png
+│
+├── src/
+│   ├── model.py                # AlzheimerDetector inference interface
+│   ├── preprocess.py           # MRI image preprocessing & resizing
+│   └── utils.py                # Model metadata helper utilities
+│
+├── static/                     # Flask static assets
+├── templates/                  # Flask HTML templates
+│
+└── tests/
+    └── test_model.py           # Model prediction validation tests
 ```
 
 ---
 
-# ⚙️ Tech Stack
-
-| Component | Technology |
-|-----------|------------|
-| Deep Learning | TensorFlow 2.10, Keras |
-| Classification | Scikit-learn SVM |
-| API | Flask, Flask-RESTful |
-| Deployment | Docker, Google Cloud Run |
-| Explainability | SHAP, LIME |
-| Monitoring | Google Cloud Logging |
-
----
-
-# 📊 Dataset
-
-**Dataset Source**
-
-ADNI – Alzheimer's Disease Neuroimaging Initiative  
-http://adni.loni.usc.edu/
-
-| Class | Description | Samples |
-|------|-------------|---------|
-| AD | Alzheimer's Disease | 2,500 |
-| MCI | Mild Cognitive Impairment | 3,200 |
-| CN | Cognitively Normal | 2,800 |
-
-### Preprocessing Steps
-
-- MRI images resized to **128 × 128**
-- Intensity normalization
-- Data augmentation
-  - rotation
-  - flipping
-  - zoom
-- Dataset split
-  - Train: **70%**
-  - Validation: **15%**
-  - Test: **15%**
-
----
-
-# 🎯 Model Performance
-
-### Classification Report
-
-| Class | Precision | Recall | F1 Score | Support |
-|------|------|------|------|------|
-| AD | 0.91 | 0.94 | 0.92 | 375 |
-| MCI | 0.89 | 0.87 | 0.88 | 480 |
-| CN | 0.93 | 0.92 | 0.92 | 420 |
-| **Overall** | **0.91** | **0.91** | **0.91** | **1275** |
-
----
-
-### Confusion Matrix
+## 🔄 Model Pipeline
 
 ```
-        Predicted
-        AD   MCI   CN
-Actual
-AD     353   15     7
-MCI     22  418    40
-CN       8   26   386
+MRI Image
+    ↓
+Image Preprocessing
+    ↓
+CNN Feature Extraction
+    ↓
+SVM Classification
+    ↓
+Prediction Output
 ```
 
 ---
 
-### ROC Curves
+## 🚀 Installation
 
-![ROC Curve](assets/roc_curve.png)
-
----
-
-# 🚀 Installation
-
-### Prerequisites
-
-- Python **3.8+**
-- Docker *(optional for deployment)*
-- Google Cloud SDK *(optional)*
-
----
-
-### Clone Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/mrudula1501/alzheimers-detection.git
 cd alzheimers-detection
 ```
 
----
-
-### Create Virtual Environment
+### 2. Create a Virtual Environment
 
 ```bash
 python -m venv venv
+```
+
+**Activate on macOS/Linux:**
+```bash
 source venv/bin/activate
 ```
 
-Windows:
-
-```
+**Activate on Windows:**
+```bash
 venv\Scripts\activate
 ```
 
----
-
-### Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -211,220 +112,94 @@ pip install -r requirements.txt
 
 ---
 
-### Run Inference
-
-```bash
-python predict.py --image samples/test_mri.jpg
-```
-
----
-
-# 📦 Requirements
-
-```
-tensorflow>=2.10.0
-keras>=2.10.0
-scikit-learn>=1.0.0
-flask>=2.0.0
-pillow>=9.0.0
-numpy>=1.21.0
-pandas>=1.3.0
-matplotlib>=3.5.0
-shap>=0.40.0
-lime>=0.2.0
-gunicorn>=20.1.0
-```
-
----
-
-# 💻 Usage
-
-### Python API
-
-```python
-from model import AlzheimerDetector
-
-detector = AlzheimerDetector(model_path='models/cnn_svm_hybrid.h5')
-
-result = detector.predict('brain_mri.jpg')
-
-print(result)
-```
-
-Output example
-
-```
-{
- 'class': 'AD',
- 'confidence': 0.94,
- 'probabilities': {...}
-}
-```
-
----
-
-### Flask REST API
-
-Start server
+## ▶️ Run the App
 
 ```bash
 python app.py
 ```
 
-Send request
+Open your browser and navigate to:
 
-```bash
-curl -X POST -F "image=@brain_mri.jpg" http://localhost:5000/predict
+```
+http://127.0.0.1:5000/health
 ```
 
-Example response
+**Expected response:**
+```json
+{"status": "healthy"}
+```
 
+---
+
+## 💡 Example Usage
+
+```python
+from src.model import AlzheimerDetector
+from src.preprocess import preprocess_image
+
+# Load model
+detector = AlzheimerDetector("models/Alzhimer_model.h5")
+
+# Preprocess and predict
+image = preprocess_image("samples/test1.jpg")
+result = detector.predict("samples/test1.jpg")
+
+print(result)
+```
+
+**Example output:**
 ```json
 {
-  "prediction": "AD",
-  "confidence": 0.94,
-  "probabilities": {
-    "AD": 0.94,
-    "MCI": 0.04,
-    "CN": 0.02
-  },
-  "explanation": "shap_values_base64_encoded"
+    "prediction": "AD",
+    "confidence": 0.94,
+    "model_path": "models/Alzhimer_model.h5"
 }
 ```
 
 ---
 
-# 🐳 Deployment
-
-### Docker Local
-
-Build container
+## 🧪 Testing
 
 ```bash
-docker build -t alzheimers-detection .
-```
-
-Run container
-
-```bash
-docker run -p 5000:5000 alzheimers-detection
+pytest tests/
 ```
 
 ---
 
-### Google Cloud Deployment
+## 📊 Results
 
-Build image
+Training artifacts are available in the `assets/` directory:
 
-```bash
-gcloud builds submit --tag gcr.io/your-project/alzheimers-detection
-```
-
-Deploy to Cloud Run
-
-```bash
-gcloud run deploy alzheimers-api \
-  --image gcr.io/your-project/alzheimers-detection \
-  --platform managed \
-  --region us-central1 \
-  --allow-unauthenticated
-```
-
-Live endpoint example
-
-```
-https://alzheimers-api-xyz-uc.a.run.app/predict
-```
+| File | Description |
+|------|-------------|
+| `training_accuracy.png` | Accuracy curve across epochs |
+| `training_loss.png` | Loss curve across epochs |
+| `confusion_matrix.png` | Classification quality per class |
 
 ---
 
-# 📈 Results & Visualizations
+## 🔮 Future Improvements
 
-### Training History
-
-![Training Curves](assets/training_history.png)
-
-Model converged after **50 epochs with early stopping**.
-
----
-
-### Sample Predictions
-
-| MRI Image | Prediction | Confidence | Explanation |
-|-----------|------------|-----------|-------------|
-| ![MRI1](assets/sample1.jpg) | AD | 94% | SHAP |
-| ![MRI2](assets/sample2.jpg) | MCI | 89% | SHAP |
-| ![MRI3](assets/sample3.jpg) | CN | 92% | SHAP |
+- [ ] Replace placeholder inference with the full trained model pipeline
+- [ ] Add proper Flask prediction endpoint (`/predict`)
+- [ ] Add SHAP / LIME explainability visualizations
+- [ ] Add Docker support
+- [ ] Add CI/CD via GitHub Actions
+- [ ] Move model weights to releases or external storage (e.g., HuggingFace Hub)
 
 ---
 
-### Explainability (SHAP)
+## 📝 Notes
 
-![SHAP](assets/shap_summary.png)
-
-Shows which brain regions contributed most to prediction.
+This repository has been reorganized to separate active project structure from older experimental code, which is stored in `legacy/`.
 
 ---
 
-# 🔮 Future Work
+## 📬 Contact
 
-- Multi-modal learning combining MRI and cognitive scores
-- 3D CNN architecture using volumetric MRI scans
-- Federated learning across hospital networks
-- Mobile deployment using TensorFlow Lite
-- Integration with clinical workflow systems
+**Mrudula Deshmukh**
 
----
-
-# 📚 References
-
-1. ADNI Dataset  
-http://adni.loni.usc.edu/
-
-2. SHAP  
-Lundberg, S.M., Lee, S.I.  
-"A Unified Approach to Interpreting Model Predictions"
-
-3. LIME  
-Ribeiro, Singh, Guestrin  
-"Why Should I Trust You?"
-
----
-
-# 🤝 Contributing
-
-Contributions are welcome.
-
-Steps
-
-1. Fork the repository  
-2. Create a feature branch  
-3. Commit your changes  
-4. Submit a Pull Request
-
----
-
-# 📄 License
-
-MIT License
-
-See `LICENSE` file for details.
-
----
-
-# 📬 Contact
-
-Mrudula Deshmukh  
-Email: mrudulad25@gmail.com
-
-Project Repository
-
-https://github.com/mrudula1501/alzheimers-detection
-
-Portfolio
-
-https://mrudula1501.github.io/
-
----
-
-⭐ If you find this project useful, please consider giving it a star.
+[![GitHub](https://img.shields.io/badge/GitHub-mrudula1501-181717?style=flat&logo=github)](https://github.com/mrudula1501)
+[![Portfolio](https://img.shields.io/badge/Portfolio-mrudula1501.github.io-10B981?style=flat&logo=githubpages&logoColor=white)](https://mrudula1501.github.io/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-dmrudula-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dmrudula/)
+[![Email](https://img.shields.io/badge/Email-mrudulad25@gmail.com-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:mrudulad25@gmail.com)
