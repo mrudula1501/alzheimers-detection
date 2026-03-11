@@ -14,4 +14,4 @@ data/
 *.db
 
 models/*.h5
-models/*.pkl
+models/*.pkl.Rhistory
