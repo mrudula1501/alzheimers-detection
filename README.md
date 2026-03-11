@@ -6,7 +6,7 @@
 [![Flask](https://img.shields.io/badge/Flask-2.0-000000?style=flat&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![License](https://img.shields.io/badge/License-MIT-10B981?style=flat)](LICENSE)
 
-Production-focused machine learning project for early Alzheimer's disease detection from MRI images using a hybrid **CNN + SVM** workflow.
+Deep learning system for Alzheimer's detection from MRI scans using a CNN + SVM hybrid pipeline.
 
 ---
 
