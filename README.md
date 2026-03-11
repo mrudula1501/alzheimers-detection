@@ -176,6 +176,18 @@ Training artifacts are available in the `assets/` directory:
 | `training_loss.png` | Loss curve across epochs |
 | `confusion_matrix.png` | Classification quality per class |
 
+## Sample Training Results
+
+### Confusion Matrix
+![Confusion Matrix](assets/confusion_matrix.png)
+
+### Training Accuracy
+![Training Accuracy](assets/training_accuracy.png)
+
+### Training Loss
+![Training Loss](assets/training_loss.png)
+
+
 ---
 
 ## 🔮 Future Improvements
